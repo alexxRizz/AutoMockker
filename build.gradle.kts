@@ -33,6 +33,10 @@ kotlin {
 publishing {
   publications {
     create<MavenPublication>("maven") {
+      groupId = "alexx.rizz"
+      artifactId = "automockker"
+      version = "0.0.1"
+
       from(components["java"])
     }
   }
