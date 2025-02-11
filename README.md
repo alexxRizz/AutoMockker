@@ -1,0 +1,1 @@
+[![](https://jitpack.io/v/alexxRizz/AutoMockker.svg)](https://jitpack.io/#alexxRizz/AutoMockker)
