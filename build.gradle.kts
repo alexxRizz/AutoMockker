@@ -31,14 +31,8 @@ kotlin {
 }
 
 publishing {
-  repositories {
-    maven {
-      url = uri("https://github.com/alexxRizz/AutoMockker")
-    }
-  }
-
   publications {
-    create<MavenPublication>("mavenJava") {
+    create<MavenPublication>("maven") {
       from(components["java"])
     }
   }
