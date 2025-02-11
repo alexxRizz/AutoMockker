@@ -1,5 +1,6 @@
 plugins {
   id("org.jetbrains.kotlin.jvm")
+  id("maven-publish")
 }
 
 group = "alexx.rizz"
@@ -27,4 +28,18 @@ tasks.test {
 }
 kotlin {
   jvmToolchain(17)
+}
+
+publishing {
+  repositories {
+    maven {
+      url = uri("https://github.com/alexxRizz/AutoMockker")
+    }
+  }
+
+  publications {
+    create<MavenPublication>("mavenJava") {
+      from(components["java"])
+    }
+  }
 }
