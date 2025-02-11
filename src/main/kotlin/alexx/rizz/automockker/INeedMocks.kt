@@ -1,9 +1,13 @@
 package alexx.rizz.automockker
 
-interface INeedMockks<TSut : Any> {
+interface INeedMockks {
+
+  var mocks: AutoMockker
+}
+
+interface INeedMockksWithSut<TSut : Any> : INeedMockks {
 
   var sut: TSut
-  var mocks: AutoMockker
 
   fun newSut(): TSut? = null
 

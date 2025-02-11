@@ -6,7 +6,7 @@ import io.kotest.matchers.*
 import io.mockk.*
 import org.junit.jupiter.api.*
 
-class SutWithInjectCtrAnnotationTests : AutoMockerTestsBase<SutWithInjectCtrAnnotation>() {
+class SutWithInjectCtrAnnotationTests : AutoMockkerTestsBase<SutWithInjectCtrAnnotation>() {
 
   private val mSomeDependency get() = mocks.mock<ISomeDependency>()
 
@@ -21,7 +21,7 @@ class SutWithInjectCtrAnnotationTests : AutoMockerTestsBase<SutWithInjectCtrAnno
   }
 
   @Test
-  fun `Should get injected mock`() {
+  fun `Should use injected mock`() {
     every { mSomeDependency.str } returns "test"
 
     sut.testDependency() shouldBe "test"

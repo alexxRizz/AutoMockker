@@ -1,12 +1,11 @@
-package alexx.rizz
+package alexx.rizz.example
 
-import alexx.rizz.automockker.*
 import alexx.rizz.suts.*
 import io.kotest.matchers.*
 import io.mockk.*
 import org.junit.jupiter.api.*
 
-class SutWithPrimaryCtrTests : AutoMockkerTestsBase<SutWithPrimaryCtr>() {
+class SutTests : SutTestsBase<SutWithPrimaryCtr>() {
 
   private val mSomeDependency get() = mocks.mock<ISomeDependency>()
 

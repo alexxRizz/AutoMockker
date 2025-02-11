@@ -1,21 +1,19 @@
 package alexx.rizz.automockker
 
-import io.mockk.*
 import org.junit.jupiter.api.extension.*
-import kotlin.reflect.*
 
 class AutoMockkerExtension : BeforeEachCallback, BeforeTestExecutionCallback {
 
   override fun beforeEach(context: ExtensionContext) {
     // println("AutoMockkerExtension beforeEach()")
-    val needMocks = context.requiredTestInstance as INeedMockks<*>
-    val mocks = AutoMockker(MockkingImpl)
+    val needMocks = context.requiredTestInstance as INeedMockksWithSut<*>
+    val mocks = AutoMockker()
     needMocks.mocks = mocks
   }
 
   override fun beforeTestExecution(context: ExtensionContext) {
     // println("AutoMockkerExtension beforeTestExecution()")
-    val needMocks = context.requiredTestInstance as INeedMockks<*>
+    val needMocks = context.requiredTestInstance as INeedMockksWithSut<*>
     val sut = needMocks.newSut()
     if (sut != null) {
       needMocks.setSutImpl(sut)
@@ -25,10 +23,4 @@ class AutoMockkerExtension : BeforeEachCallback, BeforeTestExecutionCallback {
       needMocks.setSutImpl(autoMockedSut)
     }
   }
-}
-
-private object MockkingImpl : Mocking {
-
-  override fun <T : Any> mockClass(type: KClass<T>): T =
-    mockkClass(type, relaxed = true)
 }

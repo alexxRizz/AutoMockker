@@ -5,8 +5,8 @@ import kotlin.reflect.full.*
 
 object SutReflectionExtensions {
 
-  fun getSutClass(tests: INeedMockks<*>): KClass<*> {
-    val needMocks = tests::class.allSupertypes.first { it.classifier == INeedMockks::class }
+  fun getSutClass(tests: INeedMockksWithSut<*>): KClass<*> {
+    val needMocks = tests::class.allSupertypes.first { it.classifier == INeedMockksWithSut::class }
     val type = needMocks.arguments[0].type!!.classifier
     return type as KClass<*>
   }

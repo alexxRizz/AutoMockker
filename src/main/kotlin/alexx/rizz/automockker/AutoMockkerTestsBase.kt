@@ -3,7 +3,7 @@ package alexx.rizz.automockker
 import org.junit.jupiter.api.extension.*
 
 @ExtendWith(AutoMockkerExtension::class)
-open class AutoMockerTestsBase<TSut : Any> : INeedMockks<TSut> {
+open class AutoMockkerTestsBase<TSut : Any> : INeedMockksWithSut<TSut> {
 
   override lateinit var sut: TSut
 

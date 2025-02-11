@@ -1,5 +1,6 @@
 package alexx.rizz.automockker
 
+import io.mockk.*
 import javax.inject.*
 import kotlin.reflect.*
 import kotlin.reflect.full.*
@@ -8,7 +9,13 @@ interface Mocking {
   fun <T : Any> mockClass(type: KClass<T>): T
 }
 
-class AutoMockker(private val mMocking: Mocking) {
+private object MockkingImpl : Mocking {
+
+  override fun <T : Any> mockClass(type: KClass<T>): T =
+    mockkClass(type, relaxed = true)
+}
+
+class AutoMockker(private val mMocking: Mocking = MockkingImpl) {
 
   private val mMocks = mutableMapOf<KClass<*>, Any>()
   private val mSubSuts = mutableMapOf<KClass<*>, Any>()
