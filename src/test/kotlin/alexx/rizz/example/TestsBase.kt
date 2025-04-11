@@ -24,11 +24,11 @@ abstract class SutTestsBase<TSut : Any> : TestsBase(), INeedMockksWithSut<TSut> 
   fun setUpSutTestsBase() {
     beforeSutCreation()
     val newSut = newSut()
-    @Suppress("UNCHECKED_CAST")
     sut =
       if (newSut != null) {
         newSut
       } else {
+        @Suppress("UNCHECKED_CAST")
         val sutClass = SutReflectionExtensions.getSutClass(this) as KClass<TSut>
         mocks.sut(sutClass)
       }
