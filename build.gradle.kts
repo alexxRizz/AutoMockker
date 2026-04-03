@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "alexx.rizz"
-version = "0.0.1"
+version = "0.0.4"
 
 repositories {
   mavenCentral()
@@ -35,7 +35,7 @@ publishing {
     create<MavenPublication>("maven") {
       groupId = "alexx.rizz"
       artifactId = "automockker"
-      version = "0.0.1"
+      version = "0.0.4"
 
       from(components["java"])
     }

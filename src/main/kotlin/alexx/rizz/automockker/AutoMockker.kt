@@ -21,10 +21,17 @@ class AutoMockker(private val mMocking: Mocking = MockkingImpl) {
   private val mSubSuts = mutableMapOf<KClass<*>, Any>()
 
   @PublishedApi
+  internal val mTransients = mutableSetOf<KClass<*>>()
+
+  @PublishedApi
   internal val mPredefined = mutableMapOf<KClass<*>, Any>()
 
   inline fun <reified TInterface> use(predefined: Any) {
     mPredefined[TInterface::class] = predefined
+  }
+
+  inline fun <reified T> transient() {
+    mTransients.add(T::class)
   }
 
   inline fun <reified T : Any> mock(): T =
@@ -56,12 +63,12 @@ class AutoMockker(private val mMocking: Mocking = MockkingImpl) {
         mock(it.type.classifier as KClass<*>)
       } else {
         val alreadyCreatedSubSut = mSubSuts[argClass]
-        if (alreadyCreatedSubSut != null) {
-          alreadyCreatedSubSut
-        } else {
+        if (alreadyCreatedSubSut == null || mTransients.contains(argClass)) {
           val subSut = sut(argClass)
           mSubSuts[argClass] = subSut
           subSut
+        } else {
+          alreadyCreatedSubSut
         }
       }
     }.toTypedArray()
